@@ -1,9 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using PictureToStudio;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-
 var converter = new PictureConverter();
+var resizer = new PictureResizer();
+
 Console.WriteLine("Hello and welcome to our personal image enhancer!\r");
 Console.WriteLine("First enter the path to the image:");
 string inputPath = Console.ReadLine();
@@ -18,7 +20,11 @@ Console.WriteLine("Sit back and wait for your new picture in the studio!");
 
 
 Image originalImage = Image.FromFile(inputPath);
-Image enhancedImage = converter.ToStudio((Bitmap)originalImage);
+
+float scaleFactor = 1.5f;
+var resizedImage = resizer.BicubicInterpolation((Bitmap)originalImage, scaleFactor);
+
+Image enhancedImage = converter.ToStudio(resizedImage);
 enhancedImage.Save($"{outputPath}\\{newFileName}.png", ImageFormat.Png);
 
 Console.WriteLine($"Your {newFileName} is no available at {outputPath}!");
