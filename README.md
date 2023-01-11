@@ -25,6 +25,13 @@ Bitmap studioImage = converter.ToStudio(originalImage);
 
 You can then save the `studioImage` to a file or display it in an image viewer.
 
+Here's an example of how to use the `PictureResizer` class:
+
+```c#
+Image originalImage = Image.FromFile("path/to/image.jpg");
+Bitmap bicubicInterpolatedImage = BicubicInterpolation((Bitmap)originalImage, 1.5f);
+```
+
 ## Note
 
 You'll need to add the necessary references and dependencies to the project to be able to use the functions.
